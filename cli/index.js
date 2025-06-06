@@ -56,7 +56,7 @@ function getGitHubInfo() {
     {
       type: "text",
       name: "user",
-      message: "Enter the username of the preview git repo:",
+      message: "Enter the username of the preview_public git repo:",
     },
   ]);
 
@@ -69,7 +69,7 @@ function getGitHubInfo() {
       .readdirSync(sourceDir)
       .filter((file) => fs.statSync(path.join(sourceDir, file)).isFile());
 
-    const baseUrl = `PREVIEW_APP_URL/protected/${username}@${repo}`;
+    const baseUrl = `preview_public_APP_URL/protected/${username}@${repo}`;
     const urls = fileNames.map((file) => `${baseUrl}/${file}`);
     console.log("\n📂 File access URLs:");
     urls.forEach((url) => console.log(`- ${url}`));
@@ -110,17 +110,17 @@ jobs:
 
     - name: Clone target repo and sync content
       run: |
-        git clone https://\${{ secrets.GH_SYNC_TOKEN }}@github.com/${response.user}/preview.git
-        rm -rf preview/public/protected/\$DIR
-        mkdir -p preview/public/protected/\$DIR
-        cp -r ${response.sourcePath}/. preview/public/protected/\$DIR/
-        echo "Last sync: \$PUSH_TIME" > preview/public/protected/\$DIR/.sync_log
-        echo "Last commit: \$COMMIT_MSG" >> preview/public/protected/\$DIR/.sync_log
-        echo "Commit SHA: \$COMMIT_SHA" >> preview/public/protected/\$DIR/.sync_log
-        echo "Source: \$USER/\$REPO" >> preview/public/protected/\$DIR/.sync_log
-        echo "View diff: \$GITHUB_URL" >> preview/public/protected/\$DIR/.sync_log   
-        echo "Org: ${response.org}" >> preview/public/protected/\$DIR/.sync_log   
-        cd preview
+        git clone https://\${{ secrets.GH_SYNC_TOKEN }}@github.com/${response.user}/preview_public.git
+        rm -rf preview_public/public/protected/\$DIR
+        mkdir -p preview_public/public/protected/\$DIR
+        cp -r ${response.sourcePath}/. preview_public/public/protected/\$DIR/
+        echo "Last sync: \$PUSH_TIME" > preview_public/public/protected/\$DIR/.sync_log
+        echo "Last commit: \$COMMIT_MSG" >> preview_public/public/protected/\$DIR/.sync_log
+        echo "Commit SHA: \$COMMIT_SHA" >> preview_public/public/protected/\$DIR/.sync_log
+        echo "Source: \$USER/\$REPO" >> preview_public/public/protected/\$DIR/.sync_log
+        echo "View diff: \$GITHUB_URL" >> preview_public/public/protected/\$DIR/.sync_log   
+        echo "Org: ${response.org}" >> preview_public/public/protected/\$DIR/.sync_log   
+        cd preview_public
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
         git add .
@@ -157,9 +157,9 @@ jobs:
 
     - name: Clone target repo and remove directory
       run: |
-        git clone https://\${{ secrets.GH_SYNC_TOKEN }}@github.com/${response.user}/preview.git
-        rm -rf preview/public/protected/\$DIR
-        cd preview
+        git clone https://\${{ secrets.GH_SYNC_TOKEN }}@github.com/${response.user}/preview_public.git
+        rm -rf preview_public/public/protected/\$DIR
+        cd preview_public
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
         git add .

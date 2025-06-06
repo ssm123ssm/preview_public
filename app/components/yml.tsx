@@ -95,16 +95,16 @@ jobs:
 
     - name: Clone target repo and sync content
       run: |
-        git clone https://\${{ secrets.GH_SYNC_TOKEN }}@github.com/ssm123ssm/preview.git
-        rm -rf preview/public/protected/\$DIR
-        mkdir -p preview/public/protected/\$DIR
-        cp -r 2_scripts/. preview/public/protected/\$DIR/
-        echo "Last sync: \$PUSH_TIME" > preview/public/protected/\$DIR/.sync_log
-        echo "Last commit: \$COMMIT_MSG" >> preview/public/protected/\$DIR/.sync_log
-        echo "Commit SHA: \$COMMIT_SHA" >> preview/public/protected/\$DIR/.sync_log
-        echo "Source: \$USER/\$REPO" >> preview/public/protected/\$DIR/.sync_log
-        echo "View diff: \$GITHUB_URL" >> preview/public/protected/\$DIR/.sync_log
-        cd preview
+        git clone https://\${{ secrets.GH_SYNC_TOKEN }}@github.com/{user}/preview_public.git
+        rm -rf preview_public/public/protected/\$DIR
+        mkdir -p preview_public/public/protected/\$DIR
+        cp -r 2_scripts/. preview_public/public/protected/\$DIR/
+        echo "Last sync: \$PUSH_TIME" > preview_public/public/protected/\$DIR/.sync_log
+        echo "Last commit: \$COMMIT_MSG" >> preview_public/public/protected/\$DIR/.sync_log
+        echo "Commit SHA: \$COMMIT_SHA" >> preview_public/public/protected/\$DIR/.sync_log
+        echo "Source: \$USER/\$REPO" >> preview_public/public/protected/\$DIR/.sync_log
+        echo "View diff: \$GITHUB_URL" >> preview_public/public/protected/\$DIR/.sync_log
+        cd preview_public
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
         git add .

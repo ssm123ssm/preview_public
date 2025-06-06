@@ -123,7 +123,6 @@ const getFolderCommitMessage = (folderName: string) => {
   return null;
 };
 
-//Get commit URL from the .sync_log file (View diff: https://github.com/ssm123ssm/adaptive_sampling_app/commit/20d560c1c718e712cacf444c9f21399b1845c0b8)
 const getFolderCommitUrl = (folderName: string) => {
   const logFilePath = path.join(
     process.cwd(),
