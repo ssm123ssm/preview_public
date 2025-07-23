@@ -36,7 +36,7 @@ export default function Home() {
 
           <div className="p-10 border-b border-[#F2F2F2]">
             <h1 className="text-5xl font-bold tracking-tight text-[#131316] relative">
-              Preview
+              Preview alpha
             </h1>
 
             <p className="text-[#5E5F6E] pt-3 pb-6 max-w-[30rem] text-[1.0625rem] relative">
